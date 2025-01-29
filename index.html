@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aforo Privacy Policy</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        a {
+            color: #3498db;
+        }
+        .error {
+            color: #e74c3c;
+            padding: 20px;
+            border: 1px solid #e74c3c;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Try to load the privacy policy file
+        fetch('PrivacyPolicy.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Privacy Policy file not found');
+                }
+                return response.text();
+            })
+            .then(text => {
+                document.getElementById('content').innerHTML = marked.parse(text);
+            })
+            .catch(error => {
+                document.getElementById('content').innerHTML = `
+                    <div class="error">
+                        <h2>Error Loading Privacy Policy</h2>
+                        <p>${error.message}</p>
+                        <p>Please try again later or contact support at binktools@gmail.com</p>
+                    </div>
+                `;
+            });
+    </script>
+</body>
+</html> 
